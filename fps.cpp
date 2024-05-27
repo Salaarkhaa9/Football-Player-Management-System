@@ -10,7 +10,6 @@ struct Node {
     int got_red_card;
     int got_yellow_card;
     float pass_accuracy;
-    char key_pass[100];
     Node* next;
 };
 
@@ -30,7 +29,7 @@ void player_info_add() {
 
     Node* new_node = new Node();
     cout << "Enter Player Name: ";
-    scanf("%*c%[^\n]", new_node->player_name);
+    cin>>new_node->player_name;
     cout << endl;
 
     cout << "Enter Jersey Number: ";
@@ -53,9 +52,6 @@ void player_info_add() {
     cin >> new_node->pass_accuracy;
     cout << endl;
 
-    cout << "Key Pass, Yes or Not: ";
-    scanf("%*c%[^\n]", new_node->key_pass);
-    cout << endl;
 
     new_node->next = nullptr;
 
@@ -127,7 +123,6 @@ void display_team() {
         cout << "Red Card Figure: " << temp->got_red_card << endl;
         cout << "Yellow Card Figure: " << temp->got_yellow_card << endl;
         cout << "Pass accuracy: " << temp->pass_accuracy << endl;
-        cout << "Key pass: " << temp->key_pass << endl;
         cout << "\n";
     }
 
@@ -140,7 +135,7 @@ void search_player() {
     int number;
 
     cout << "Enter Name: ";
-    scanf("%*c%[^\n]", name);
+    cin>>name;
     cout << endl;
 
     cout << "Enter Jersey Number: ";
@@ -165,7 +160,6 @@ void search_player() {
                 cout << "Red Card Figure: " << temp->got_red_card << endl;
                 cout << "Yellow Card Figure: " << temp->got_yellow_card << endl;
                 cout << "Pass accuracy: " << temp->pass_accuracy << "%" << endl;
-                cout << "Key pass: " << temp->key_pass << endl;
                 cout << endl;
                 found = true;
                 break;
@@ -187,7 +181,7 @@ void edit() {
     int number, team;
 
     cout << "Enter Player Name: ";
-    scanf("%*c%[^\n]", name);
+    cin>>name;
     cout << endl;
 
     cout << "Enter Jersey Number: ";
@@ -236,7 +230,7 @@ void edit() {
             found = true;
 
             cout << "Enter Update Player Name: ";
-            scanf("%*c%[^\n]", temp->player_name);
+            cin>>temp->player_name;
             cout << endl;
 
             cout << "Enter Update Jersey Number: ";
@@ -259,9 +253,6 @@ void edit() {
             cin >> temp->pass_accuracy;
             cout << endl;
 
-            cout << "Key Pass: ";
-            scanf("%*c%[^\n]", temp->key_pass);
-            cout << endl;
         }
         temp_buffer.push(temp);
     }
@@ -305,7 +296,7 @@ void delete_player() {
     cout << endl;
 
     cout << "Enter Player Name: ";
-    scanf("%*c%[^\n]", name);
+    cin>> name;
     cout << endl;
 
     cout << "Enter Jersey Number: ";
@@ -458,7 +449,7 @@ void show() {
                 cout << "Red Card Figure: " << temp->got_red_card << endl;
                 cout << "Yellow Card Figure: " << temp->got_yellow_card << endl;
                 cout << "Pass accuracy: " << temp->pass_accuracy << "%" << endl;
-                cout << "Key pass: " << temp->key_pass << endl;
+
                 cout << "\n";
             }
 
