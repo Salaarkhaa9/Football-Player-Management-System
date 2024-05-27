@@ -27,6 +27,10 @@ void player_info_add() {
     cin >> team;
     cout << endl;
 
+    if(team>5){
+        cout<<"You can add players only in 5 teams.\n"<<endl;
+    }
+    else{
     Node* new_node = new Node();
     cout << "Enter Player Name: ";
     cin>>new_node->player_name;
@@ -72,7 +76,9 @@ void player_info_add() {
             team_5.push(new_node);
             break;
         default:
-            cout << "This memory only takes 5 team data.";
+            cout << "This memory only takes 5 team data.\n"<<endl;
+            return;
+    }
     }
 }
 
@@ -101,12 +107,12 @@ void display_team() {
             temp_stack = team_5;
             break;
         default:
-            cout << "Sorry, there is nothing to print.\n";
+            cout << "Team number is invalid nothing to print.\n"<<endl;
             return;
     }
 
     if (temp_stack.empty()) {
-        cout << "There is no info in the Match-" << team << " list.\n";
+        cout << "There is no info in the Team-" << team << " list.\n"<<endl;
         return;
     }
 
@@ -133,7 +139,13 @@ void display_team() {
 void search_player() {
     char name[100];
     int number;
+      
+    stack<Node*> temp_stack[5] = {team_1, team_2, team_3, team_4, team_5};
+    if(temp_stack[0].empty()){
+        cout<<"Teams are empty nothing to search.\n"<<endl;
+    }else{
 
+    
     cout << "Enter Name: ";
     cin>>name;
     cout << endl;
@@ -142,7 +154,6 @@ void search_player() {
     cin >> number;
     cout << endl;
 
-    stack<Node*> temp_stack[5] = {team_1, team_2, team_3, team_4, team_5};
     bool found = false;
 
     for (int i = 0; i < 5; i++) {
@@ -171,14 +182,45 @@ void search_player() {
     }
 
     if (!found) {
-        cout << "No Info available about the player.\n";
+        cout << "No Info available about the player.\n"<<endl;
     }
 }
-
+}
 /// This is for Updating Player Info.
 void edit() {
     char name[100];
     int number, team;
+
+    cout << "Enter Team Number: ";
+    cin >> team;
+    cout << endl;
+    
+        stack<Node*> temp_stk;
+    switch (team) {
+        case 1:
+            temp_stk = team_1;
+            break;
+        case 2:
+            temp_stk = team_2;
+            break;
+        case 3:
+            temp_stk = team_3;
+            break;
+        case 4:
+            temp_stk = team_4;
+            break;
+        case 5:
+            temp_stk = team_5;
+            break;
+        default:
+            cout << "Invalid input.\n"<<endl;
+            return;
+    }
+
+    if (temp_stk.empty()) {
+        cout << "There is nothing to Edit as Team is Empty.\n"<<endl;
+        return;
+    }
 
     cout << "Enter Player Name: ";
     cin>>name;
@@ -186,10 +228,6 @@ void edit() {
 
     cout << "Enter Jersey Number: ";
     cin >> number;
-    cout << endl;
-
-    cout << "Enter Team Number: ";
-    cin >> team;
     cout << endl;
 
     stack<Node*> temp_stack;
@@ -210,12 +248,12 @@ void edit() {
             temp_stack = team_5;
             break;
         default:
-            cout << "There is nothing to Edit.\n";
+            cout << "There is nothing to Edit.\n"<<endl;
             return;
     }
 
     if (temp_stack.empty()) {
-        cout << "There is nothing to Edit.\n";
+        cout << "There is nothing to Edit.\n"<<endl;
         return;
     }
 
@@ -282,7 +320,7 @@ void edit() {
     }
 
     if (!found) {
-        cout << "Player not found.\n";
+        cout << "Player not found.\n"<<endl;
     }
 }
 
@@ -294,6 +332,33 @@ void delete_player() {
     cout << "Enter Team Number: ";
     cin >> team_number;
     cout << endl;
+
+    stack<Node*> temp_stk;
+    switch (team_number) {
+        case 1:
+            temp_stk = team_1;
+            break;
+        case 2:
+            temp_stk = team_2;
+            break;
+        case 3:
+            temp_stk = team_3;
+            break;
+        case 4:
+            temp_stk = team_4;
+            break;
+        case 5:
+            temp_stk = team_5;
+            break;
+        default:
+            cout << "Invalid team number.\n"<<endl;
+            return;
+    }
+
+    if (temp_stk.empty()) {
+        cout << "No players in team " << team_number << "\n"<<endl;
+        return;
+    }
 
     cout << "Enter Player Name: ";
     cin>> name;
@@ -321,12 +386,12 @@ void delete_player() {
             temp_stack = team_5;
             break;
         default:
-            cout << "Invalid team number.\n";
+            cout << "Invalid team number.\n"<<endl;
             return;
     }
 
     if (temp_stack.empty()) {
-        cout << "No players in teams " << team_number << endl;
+        cout << "No players in team " << team_number <<"\n"<< endl;
         return;
     }
 
@@ -370,9 +435,9 @@ void delete_player() {
     }
 
     if (found) {
-        cout << "Player removed successfully.\n";
+        cout << "Player removed successfully.\n"<<endl;
     } else {
-        cout << "Player not found.\n";
+        cout << "Player not found.\n"<<endl;
     }
 }
 
@@ -415,15 +480,15 @@ void undo_last_addition() {
             }
             break;
         default:
-            cout << "Invalid team number.\n";
+            cout << "Invalid team number.\n"<<endl;
             return;
     }
 
     if (removed_player != nullptr) {
-        cout << "Removed player: " << removed_player->player_name << " (Jersey #" << removed_player->jersey_number << ")\n";
+        cout << "Removed player: " << removed_player->player_name << " (Jersey #" << removed_player->jersey_number << ")\n"<<endl;
         delete removed_player;
     } else {
-        cout << "No player to remove from Team-" << team << ".\n";
+        cout << "No player to remove from Team-" << team << ".\n"<<endl;
     }
 }
 
@@ -432,7 +497,7 @@ void show() {
 
     for (int i = 0; i < 5; i++) {
         if (teams[i].empty()) {
-            cout << "There is No Info in the Team-" << (i + 1) << " list." << endl;
+            cout << "There is No Info in the Team-" << (i + 1) << " list.\n" << endl;
             cout << endl;
         } else {
             cout << "======================== Player Info list for Team-" << (i + 1) << " ======================== " << endl;
@@ -472,11 +537,10 @@ int main() {
     cout << "####################################################################################################" << endl;
     cout << "####################################################################################################" << endl;
     cout << endl;
-    cout << "******************* Welcome To The FootBall Player Management System ******************\n";
+    cout << "************************* Welcome To The FootBall Player Management System **************************\n";
     cout << endl;
-
-    while (true) {
-        int choice;
+    int choice;
+    while (choice) {        
         cout << "1. Add Player.\n";
         cout << "2. Edit PLayer.\n";
         cout << "3. Show PLayers.\n";
